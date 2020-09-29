@@ -1,0 +1,23 @@
+ID: MovieBackend
+_schema-version: '3.1'
+version: 1.0.1
+parameters:
+  enable-parallel-deployments: true
+modules:
+ - name: backend
+   type: nodejs
+   path: src
+   parameters:
+    disk-quota: 512M
+    memory: 256M
+    provides:
+    - name: backend-api
+      public: true
+      properties:
+          url: '${default-url}'
+    requires:
+     - name: MC_Demo
+
+resources:
+ - name: MC_Demo
+   type: org.cloudfoundry.existing-service
